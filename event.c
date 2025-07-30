@@ -1,6 +1,34 @@
 
 #include "event.h"
 
+Event discrete_points[] = {
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0},
+	{0, SXGB, 0}}; /* 20 ��� */
+
+
+uint8_t array_index = 0;
+
+uint8_t array_current = 0;
+
+
 void insert_node(uint32_t time, uint16_t event, uint8_t isNull)
 {
 	discrete_points[array_index].time = time;

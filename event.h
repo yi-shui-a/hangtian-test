@@ -5,60 +5,34 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// ÊÂ¼þ¶¨Òå
-#define SXGB 0x0000 // Ê±Ðò¹Ø±Õ
-#define YJDH 0x0001 // Ò»¼¶µã»ð  £¡£¡£¡
-#define YJFL 0x0002 // Ò»¼¶·ÖÀë
-#define EJDH 0x0003 // ¶þ¼¶µã»ð
-#define EJFL 0x0004 // ¶þ¼¶·ÖÀë  /* ½×¶ÎA */
+// ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
+#define SXGB 0x0000 // Ê±ï¿½ï¿½Ø±ï¿½
+#define YJDH 0x0001 // Ò»ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define YJFL 0x0002 // Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define EJDH 0x0003 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define EJFL 0x0004 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  /* ï¿½×¶ï¿½A */
 
-#define DYZK 0x0005 // µ¯ÒíÕ¹¿ª
-#define FDGR 0x0006 // ·´µ¯¸ÉÈÅ
-#define ZDJD 0x0007 // ÖÐ¶Î»ú¶¯  /* ½×¶ÎB */
+#define DYZK 0x0005 // ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½
+#define FDGR 0x0006 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#define ZDJD 0x0007 // ï¿½Ð¶Î»ï¿½ï¿½ï¿½  /* ï¿½×¶ï¿½B */
 
-#define DTFL 0x0008 // µ¯Í··ÖÀë
-#define LDZD 0x0009 // À×´ïÖÆµ¼
-#define HWZD 0x000a // ºìÍâÖÆµ¼
-#define MBFP 0x000b // Ä¿±ê·ÖÅä
-#define DJJD 0x000c // ´ò»÷½Ç¶È  /* ½×¶ÎC */
+#define DTFL 0x0008 // ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½
+#define LDZD 0x0009 // ï¿½×´ï¿½ï¿½Æµï¿½
+#define HWZD 0x000a // ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½
+#define MBFP 0x000b // Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½
+#define DJJD 0x000c // ï¿½ï¿½ï¿½ï¿½Ç¶ï¿½  /* ï¿½×¶ï¿½C */
 
 typedef struct
 {
-	uint32_t time;	/* Ê±¼ä£¨µ¥Î»£ººÁÃë£© */
-	uint16_t event; /* ÊÂ¼þË÷Òý */
-	uint8_t isNull; /* ÊÇ·ñ¿Õ 0¿Õ 1Õ¼ÓÃ */
+	uint32_t time;	/* Ê±ï¿½ä£¨ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ë£© */
+	uint16_t event; /* ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ */
+	uint8_t isNull; /* ï¿½Ç·ï¿½ï¿½ 0ï¿½ï¿½ 1Õ¼ï¿½ï¿½ */
 } Event;
 
-#define NUMBER 20
-
-Event discrete_points[] = {
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0},
-	{0, SXGB, 0}}; /* 20 ¶à¸ö */
-
-// Êý×é²Ù×÷º¯ÊýÉùÃ÷
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 void insert_node(uint32_t time, uint16_t event, uint8_t isNull);
 
-uint8_t array_index = 0;
 
-uint8_t array_current = 0;
 
 uint16_t get_current_node(uint32_t current_time);
 
