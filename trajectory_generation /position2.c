@@ -207,7 +207,7 @@ DiscretePoint simulateMissileEvent(uint32_t time_ms) {
 // main函数，生成离散点数组文件
 int main() {
     uint32_t current_time_ms = 0;       // 当前时间（毫秒）
-    uint32_t time_step_ms = 500;        // 时间步长（500ms = 0.5秒）
+    uint32_t time_step_ms = 1000;        // 时间步长（500ms = 0.5秒）
     uint32_t total_time_ms = 400000;    // 总时间（400000ms = 400秒）
     uint32_t point_count = total_time_ms / time_step_ms + 1; // 计算总点数
 
@@ -215,7 +215,7 @@ int main() {
     srand(time(NULL));
 
     // 创建并打开输出文件
-    FILE *file = fopen("python_test.c", "w");
+    FILE *file = fopen("python_test_final.c", "w");
     if (file == NULL) {
         fprintf(stderr, "Error: Could not open file for writing.\n");
         return 1;
@@ -288,8 +288,8 @@ int main() {
         }
         
         // 使用宏名初始化事件字段
-        fprintf(file, "    {%.0f, %s, %.6f, %.6f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f},\n",
-               point.time, eventName,
+        fprintf(file, "    {%.0f, %.6f, %.6f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f},\n",
+               point.time,
                point.longitude, point.latitude, point.altitude,
                point.accelerationX, point.accelerationY, point.accelerationZ,
                point.velocityX, point.velocityY, point.velocityZ,

@@ -1,6 +1,12 @@
 {
     "files.associations": {
         "stdint.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "limits": "c",
+        "type_traits": "c",
+        "missile_control.h": "c",
+        "trajectory_data.h": "c",
+        "event.h": "c",
+        "generatedata.h": "c"
     }
 }
