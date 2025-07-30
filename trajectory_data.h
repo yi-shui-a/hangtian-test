@@ -8,31 +8,34 @@
 typedef struct trajectory
 {
     uint32_t time;
-    double longitude;         /* ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½È£ï¿½ */
-    double latitude;          /* Î³ï¿½È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½È£ï¿½ */
-    double altitude;          /* ï¿½ï¿½ï¿½Î¸ß¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½×£ï¿½ */
-    double accelerationX;     /* Xï¿½ï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½2ï¿½ï¿½ */
-    double accelerationY;     /* Yï¿½ï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½2ï¿½ï¿½ */
-    double accelerationZ;     /* Zï¿½ï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½2ï¿½ï¿½ */
-    double velocityX;         /* Xï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ë£© */
-    double velocityY;         /* Yï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ë£© */
-    double velocityZ;         /* Zï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ë£© */
-    double yawAngle;          /* Æ«ï¿½ï¿½ï¿½Ç¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½È£ï¿½ */
-    double pitchAngle;        /* ï¿½ï¿½ï¿½ï¿½ï¿½Ç¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½È£ï¿½ */
-    double rollAngle;         /* ï¿½ï¿½ï¿½ï¿½Ç¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½È£ï¿½ */
-    double yawRate;           /* Æ«ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ë£© */
-    double pitchRate;         /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ë£© */
-    double rollRate;          /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ë£© */
-    double yawAcceleration;   /* Æ«ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½2ï¿½ï¿½ */
-    double pitchAcceleration; /* ï¿½ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½2ï¿½ï¿½ */
-    double rollAcceleration;  /* ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½2ï¿½ï¿½ */
+    double longitude;         /**< ¾­¶È£¨µ¥Î»£º¶È£© */
+    double latitude;          /**< Î³¶È£¨µ¥Î»£º¶È£© */
+    double altitude;          /**< º£°Î¸ß¶È£¨µ¥Î»£ºÃ×£© */
+    double accelerationX;     /**< XÖá¼ÓËÙ¶È£¨µ¥Î»£ºÃ×/Ãë2£© */
+    double accelerationY;     /**< YÖá¼ÓËÙ¶È£¨µ¥Î»£ºÃ×/Ãë2£© */
+    double accelerationZ;     /**< ZÖá¼ÓËÙ¶È£¨µ¥Î»£ºÃ×/Ãë2£© */
+    double velocityX;         /**< XÖáËÙ¶È£¨µ¥Î»£ºÃ×/Ãë£© */
+    double velocityY;         /**< YÖáËÙ¶È£¨µ¥Î»£ºÃ×/Ãë£© */
+    double velocityZ;         /**< ZÖáËÙ¶È£¨µ¥Î»£ºÃ×/Ãë£© */
+    double yawAngle;          /**< Æ«º½½Ç¶È£¨µ¥Î»£º¶È£© */
+    double pitchAngle;        /**< ¸©Ñö½Ç¶È£¨µ¥Î»£º¶È£© */
+    double rollAngle;         /**< ºá¹ö½Ç¶È£¨µ¥Î»£º¶È£© */
+    double yawRate;           /**< Æ«º½½ÇËÙ¶È£¨µ¥Î»£º¶È/Ãë£© */
+    double pitchRate;         /**< ¸©Ñö½ÇËÙ¶È£¨µ¥Î»£º¶È/Ãë£© */
+    double rollRate;          /**< ºá¹ö½ÇËÙ¶È£¨µ¥Î»£º¶È/Ãë£© */
+    double yawAcceleration;   /**< Æ«º½½Ç¼ÓËÙ¶È£¨µ¥Î»£º¶È/Ãë2£© */
+    double pitchAcceleration; /**< ¸©Ñö½Ç¼ÓËÙ¶È£¨µ¥Î»£º¶È/Ãë2£© */
+    double rollAcceleration;  /**< ºá¹ö½Ç¼ÓËÙ¶È£¨µ¥Î»£º¶È/Ãë2£© */
 } TrajectoryData;
-
 
 void trajectory_array_ptr(TrajectoryData *trajectory_ptr);
 
 uint32_t getCurrentTime(uint32_t tick_counter); /* ï¿½ï¿½È¡ï¿½ï¿½Ç°Ê±ï¿½ï¿½ */
 
 uint8_t getCurrentStep(uint32_t tick_counter); /* ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½×¶ï¿½ ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ */
+
+TrajectoryData getTrajectoryData(uint32_t tick_counter);
+
+TrajectoryData getTrajectoryDataWithIndex(uint32_t index);
 
 #endif

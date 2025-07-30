@@ -21,13 +21,11 @@ Event discrete_points[] = {
 	{0, SXGB, 0},
 	{0, SXGB, 0},
 	{0, SXGB, 0},
-	{0, SXGB, 0}}; /* 20 ï¿½ï¿½ï¿½ */
-
+	{0, SXGB, 0}}; /* 20 ï¿½ï¿½ï¿? */
 
 uint8_t array_index = 0;
 
 uint8_t array_current = 0;
-
 
 void insert_node(uint32_t time, uint16_t event, uint8_t isNull)
 {
@@ -37,15 +35,136 @@ void insert_node(uint32_t time, uint16_t event, uint8_t isNull)
 	array_index++;
 }
 
-uint16_t get_current_node(uint32_t current_time)
+// ÅĞ¶Ïµ±Ç°·ÉĞĞ×´Ì¬ÊÇ·ñ·ûºÏÊÂ¼şĞèÇó
+int check(float trend, uint32_t alt_samples[], uint32_t current_step, uint16_t current_event)
+{
+    // ÉÏÉı½×¶ÎÅĞ¶Ï
+    if (current_step == 1)
+    {
+        // Ò»¼¶µã»ğ½×¶ÎÒªÇó¸ß¶È³ÖĞøÉÏÉı
+        if (trend < 50)
+        { 
+            return 0;
+        }
+
+        // ¼ì²é¸ß¶È²¨¶¯ÊÇ·ñ¹ı´ó
+        float variance = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            variance += fabs(alt_samples[i + 1] - alt_samples[i] - trend);
+        }
+        if (variance > 100)
+        {
+            return 0;
+        }
+
+        // ¼ì²éµ±Ç°¸ß¶ÈÊÇ·ñ·ûºÏ½×¶ÎÔ¤ÆÚ
+        if (alt_samples[2] < 10000 && trend < 80)
+        {
+            return 0;
+        }
+        else if (alt_samples[2] >= 10000 && trend < 30)
+        {
+            return 0;
+        }
+
+        return 0;
+    }
+    // Ñ²º½½×¶ÎÅĞ¶Ï
+    else if (current_step == 2)
+    {
+        // Ñ²º½½×¶ÎÒªÇó¸ß¶ÈÏà¶ÔÎÈ¶¨
+        if (fabs(trend) > 20)
+        { 
+            return 0;
+        }
+
+        // ¼ì²é¸ß¶È²¨¶¯Ä£Ê½
+        int peak_count = 0;
+        for (int i = 1; i < 4; i++)
+        {
+            if ((alt_samples[i] > alt_samples[i - 1] &&
+                 alt_samples[i] > alt_samples[i + 1]) ||
+                (alt_samples[i] < alt_samples[i - 1] &&
+                 alt_samples[i] < alt_samples[i + 1]))
+            {
+                peak_count++;
+            }
+        }
+        if (peak_count > 2)
+        { 
+            return 0;
+        }
+
+        return 0;
+    }
+    // Ä©¶Ë½×¶ÎÅĞ¶Ï
+    else if (current_step == 3)
+    {
+        // Ä©¶ËÖÆµ¼½×¶ÎÒªÇó¸ß¶È³ÖĞøÏÂ½µ
+        if (trend > -30)
+        { 
+            return 0;
+        }
+
+        // ¼ì²éÏÂ½µ¼ÓËÙ¶È
+        float accel = (alt_samples[4] - 2 * alt_samples[2] + alt_samples[0]) / 4.0;
+        if (accel > 10)
+        { 
+            return 0;
+        }
+
+        // Ä©¶Ë»ú¶¯¼ì²é
+        if (current_event == DJJD)
+        {
+            if (trend > -50)
+            { 
+                return 0;
+            }
+        }
+
+        // ¸ß¶ÈãĞÖµ¼ì²é
+        if (alt_samples[2] > 5000 && trend > -40)
+        {
+            return 0;
+        }
+
+        return 0;
+    }
+
+    return 0;
+}
+uint16_t get_current_node(uint32_t current_time, uint32_t current_step)
 {
 
 	uint16_t current_event = 0;
+	static uint32_t last_altitude = 0;
+
+	// »ñÈ¡µ±Ç°ddÊı¾İ
+	TrajectoryData current_data = getTrajectoryData(current_time);
+	uint32_t current_altitude = current_data.altitude;
+
+	// »ñÈ¡Ç°ºó5¸öµãµÄ¸ß¶ÈÊı¾İÓÃÓÚÇ÷ÊÆÅĞ¶Ï
+	uint32_t alt_samples[5]; // Ç°ºó4¸öµã¼Óµ±Ç°µã
+	for (int i = -2; i <= 2; i++)
+	{
+		uint32_t sample_time = current_time + i * 1000; // ¼ÙÉèÊ±¼ä¼ä¸ôÎª1000ms
+		TrajectoryData sample = getTrajectoryDataWithIndex(i);
+		alt_samples[i + 2] = sample.altitude;
+	}
+
+	// ¼ÆËã¸ß¶È±ä»¯Ç÷ÊÆ
+	float trend = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		trend += (alt_samples[i + 1] - alt_samples[i]);
+	}
+	trend /= 10; // Æ½¾ù±ä»¯ÂÊ
 
 	if (current_time >= discrete_points[array_current].time)
 	{
-
-		if (discrete_points[array_current].isNull > 0)
+		// Ê±¼äÌõ¼şÂú×ãÇÒ¸ß¶È±ä»¯Ç÷ÊÆ·ûºÏÒªÇó
+		if (discrete_points[array_current].isNull > 0 || check(trend, alt_samples, current_step, discrete_points[array_current].event))
 		{
 			if (discrete_points[array_current + 1].time - current_time >= discrete_points[array_current].time - current_time)
 			{

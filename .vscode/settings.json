@@ -7,7 +7,8 @@
         "missile_control.h": "c",
         "trajectory_data.h": "c",
         "event.h": "c",
-        "generatedata.h": "c"
+        "generatedata.h": "c",
+        "cmath": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
