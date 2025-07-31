@@ -6,31 +6,29 @@
 #include <stdio.h>
 #include "trajectory_data.h"
 
-// ¿¼ÂÇÊ±¼ä ´óÓÚµÈÓÚ 
+// ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ 
 #define SXGB_DELTA 0
 #define YJDH_DELTA 5000
 #define YJFL_DELTA 15000
 #define EJDH_DELTA 25000
-#define EJFL_DELTA 60000      /* ½×¶ÎA */
+#define EJFL_DELTA 60000      /* ï¿½×¶ï¿½A */
 
-#define DYZK_DELTA  60000 
-#define FDGR_DELTA  120000 
-#define ZDJD_DELTA  190000     /* ½×¶ÎB */
+#define DYZK_DELTA  40000 
+#define FDGR_DELTA  50000 
+#define ZDJD_DELTA  55000     /* ï¿½×¶ï¿½B */
  
-#define DTFL_DELTA  0 
-#define LDZD_DELTA  50000 
-#define HWZD_DELTA  80000 
-#define MBFP_DELTA  90000 
-#define DJJD_DELTA  100000     /* ½×¶ÎC */
+#define DTFL_DELTA  10000 
+#define LDZD_DELTA  15000 
+#define HWZD_DELTA  27000 
+#define MBFP_DELTA  28000 
+#define DJJD_DELTA  70000     /* ï¿½×¶ï¿½C */
 
-// º¯ÊýÉùÃ÷
-void init_trajectory_stepA(); /* ²åÈëÊý¾Ý */
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+void init_trajectory_stepA(uint32_t current); /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
-void init_trajectory_stepB(); /*  */
+void init_trajectory_stepB(uint32_t current); /*  */
 
-void init_trajectory_stepC();
-
-extern uint32_t current_step;  /* 0Î´µã»ð¡¢  1´ú±íÉÏÉý½×¶Î¡¢  2´ú±íÖÐ¼ä½×¶Î¡¢ 3´ú±íÄ©¶Ë  */
+void init_trajectory_stepC(uint32_t current);
 
 uint16_t update_missile_position(uint32_t current_time);
 

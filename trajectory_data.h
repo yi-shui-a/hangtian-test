@@ -28,11 +28,10 @@ typedef struct trajectory
     double rollAcceleration;  /* ����Ǽ��ٶȣ���λ����/��2�� */
 } TrajectoryData;
 
-
-void trajectory_array_ptr(TrajectoryData *trajectory_ptr);
+#define ALTITUDE_DELTA 1000
 
 uint32_t getCurrentTime(uint32_t tick_counter); /* ��ȡ��ǰʱ�� */
 
-uint8_t getCurrentStep(uint32_t tick_counter); /* ��ȡ��ǰ�׶� ����ǰ�� 5���� */
+uint8_t getCurrentStep(uint32_t tick_counter, uint32_t index ); /* ��ȡ��ǰ�׶� ����ǰ�� 5���� */
 
 #endif

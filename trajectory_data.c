@@ -1,12 +1,6 @@
 #include "trajectory_data.h"
 #include "generateData.h"
 
-// uint32_t index = 0;
-
-uint8_t current_step_num = 0;
-
-
-
 TrajectoryData trajectory_data[] = {
     {0, 116.417403, 39.904203, 0.34, 2.03, 0.03, 0.56, 0.10, 75.10, 0.17, 0.03, 85.07, 15.10, 10.17, 3.20, 0.14, 0.01, 0.01, -188.49},
     {1000, 116.417180, 39.906278, 6.35, 1.94, -0.43, 0.47, 15.55, 73.32, 1.93, 0.51, 84.91, 14.77, 9.87, 2.74, -3.19, -6.57, -20.91, -186.18},
@@ -411,44 +405,123 @@ TrajectoryData trajectory_data[] = {
     {400000, 117.127404, 40.204204, 0.44, -1.76, 3.10, -107.93, -35.63, -143.63, -1439.71, 0.18, -34.78, 0.26, 300.73, -43.90, -44.08, 0.18, -125.44, 0.11},
 };
 
-// extern uint8_t current_step_num;
+static uint8_t current_step_num;
 
-// extern uint32_t index;
-
-
-
-void trajectory_array_ptr(TrajectoryData *trajectory_ptr)
-{
-
-	return;
-}
-
-uint32_t getCurrentTime(uint32_t tick_counter)
-{
-
+uint32_t getCurrentTime(uint32_t tick_counter){
 	return tick_counter;
 }
+uint8_t getCurrentStepStatus(uint32_t index){
+    uint8_t i;
+    static uint8_t ascending = 0;
+    static uint8_t level_flight = 0;
+    static uint8_t descending = 0;
 
-uint8_t getCurrentStep(uint32_t tick_counter)
+    if (index >= sizeof(trajectory_data) / sizeof(trajectory_data[0])) {
+        return 0xFF; // Invalid index
+    }
+ 
+    printf("Index: %d, Altitude: %.2f\n", index, trajectory_data[index].altitude);
+    // 400s = 400 x 1000ms  , 100ms x 4000    4000 / 10 = 400
+    if ((index != 0) && (index % 10 == 0)){
+        for(i=1; i <= 10; i++){
+            if((trajectory_data[index].altitude - trajectory_data[index-i].altitude > 0) &&
+                (trajectory_data[index].altitude - trajectory_data[index+i].altitude < 0)){
+                ascending++;
+            }
+            if(abs(trajectory_data[index].altitude - trajectory_data[index-i].altitude) < ALTITUDE_DELTA){
+                level_flight++;
+            }
+            if((trajectory_data[index].altitude - trajectory_data[index-i].altitude < 0) &&
+                (trajectory_data[index].altitude - trajectory_data[index+i].altitude > 0)){
+                descending--;
+            }
+        }
+    }
+
+    printf("Ascending: %d, Level Flight: %d, Descending: %d\n", ascending, level_flight, descending);
+
+    if (ascending >= 9) {
+        ascending = 0;
+        return 10; // Ascending
+    } else if (level_flight >= 9) {
+        level_flight = 0;
+        return 0; // Level flight
+    } else if (descending <= -9) {
+        descending = 0;
+        return -10; // Descending
+    } else {
+        return 0xFF; // No significant change
+    }
+}
+
+uint8_t getCurrentStep(uint32_t tick_counter, uint32_t index)
 {
+    // Check the current step based on tick_counter and step status
+    if (tick_counter == 0) {
+        return 0xAC; // Action, start of the trajectory
+    }
+    //current_step_num = 1; // Default step number
 
-	if (tick_counter > 0 && tick_counter < STEPA)
-	{
-
-		current_step_num = 1;
-		return current_step_num;
-	}
-	else if ((tick_counter > STEPA) && (tick_counter < STEPB))
-	{
-		current_step_num = 2;
-		return current_step_num;
+#if 1
+	if (tick_counter > 0 && tick_counter < STEPA) {
+        current_step_num = 1;
+        return current_step_num;
 	}
 
-	else if ((tick_counter > STEPB) && (tick_counter < STEPC))
-	{
-		current_step_num = 3;
-		return current_step_num;
+	else if ((tick_counter > STEPA) && (tick_counter < STEPB)) {
+        current_step_num = 2;
+        return current_step_num;
+    }
+
+    else if ((tick_counter > STEPB) && (tick_counter < STEPC)) {
+        current_step_num = 3;
+        return current_step_num;
+    }
+#endif
+
+#if 0
+	if ((tick_counter > 0 ) && (tick_counter < STEPA) && ((getCurrentStepStatus(index) >= 9))) {
+        current_step_num = 1;
+        return current_step_num;
 	}
+
+	else if ((tick_counter > STEPA) && (tick_counter < STEPB) && (getCurrentStepStatus(index) == 0)) {
+        current_step_num = 2;
+        return current_step_num;
+    }
+
+    else if ((tick_counter > STEPB) && (tick_counter < STEPC) && ((getCurrentStepStatus(index) <= -9))) {
+        current_step_num = 3;
+        return current_step_num;
+    }
+#endif
+
+#if 0
+
+    if ((tick_counter > 0) && (tick_counter < STEPA)) {
+        if (getCurrentStepStatus(index) >= 9) {
+            current_step_num = 1;
+            return current_step_num;
+        } else
+            return 0xe0; // No action, ascending not detected
+    }
+
+    else if ((tick_counter > STEPA) && (tick_counter < STEPB)) {
+        if (getCurrentStepStatus(index) == 0) {
+            current_step_num = 2;
+            return current_step_num;
+        } else
+            return 0xe1; // No action, level flight not detected
+    }
+
+    else if ((tick_counter > STEPB) && (tick_counter < STEPC)) {
+        if (getCurrentStepStatus(index) <= -9) {
+            current_step_num = 3;
+            return current_step_num;
+        } else
+            return 0xe3; // No action, descending not detected
+    }
+#endif
 
 	else
 		return 0xe2;

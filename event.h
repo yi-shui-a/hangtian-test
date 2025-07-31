@@ -31,9 +31,6 @@ typedef struct
 
 // ���������������
 void insert_node(uint32_t time, uint16_t event, uint8_t isNull);
-
-
-
 uint16_t get_current_node(uint32_t current_time);
 
 #endif
