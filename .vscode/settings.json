@@ -8,7 +8,8 @@
         "trajectory_data.h": "c",
         "event.h": "c",
         "generatedata.h": "c",
-        "cmath": "c"
+        "cmath": "c",
+        "stdio.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

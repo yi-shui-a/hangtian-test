@@ -45,14 +45,17 @@ uint16_t update_missile_position(uint32_t current_time)
 		if (step == 1)
 		{
 			init_trajectory_stepA(current_time);
+			printf("111111");
 		}
 		else if (step == 2)
 		{
 			init_trajectory_stepB(current_time);
+			printf("222222");
 		}
 		else if (step == 3)
 		{
 			init_trajectory_stepC(current_time);
+			printf("333333");
 		}
 	}
 	uint16_t ret_command_code = get_current_node(current_time, current_step);

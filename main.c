@@ -7,6 +7,7 @@
 // 事件名称映射表
 const char* get_event_name(uint16_t event_code) {
     static const char* event_names[] = {
+        "FLYING",
         "YJDH", "YJFL", "EJDH", "EJFL", 
         "DYZK", "FDGR", "ZDJD", "DTFL",
         "LDZD", "HWZD", "MBFP", "DJJD"
@@ -48,11 +49,11 @@ int main() {
         current_time_ms += time_step_ms;
         
         // 模拟时间延迟
-        struct timespec ts = {
-            .tv_sec = time_step_ms / 1000,
-            .tv_nsec = (time_step_ms % 1000) * 1000000
-        };
-        nanosleep(&ts, NULL);
+        // struct timespec ts = {
+        //     .tv_sec = time_step_ms / 1000,
+        //     .tv_nsec = (time_step_ms % 1000) * 1000000
+        // };
+        // nanosleep(&ts, NULL);
     }
     
     printf("导弹控制系统运行结束\n");
