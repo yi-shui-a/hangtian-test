@@ -5,22 +5,30 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// �¼�����
-#define SXGB 0x0000 // ʱ��ر�
-#define YJDH 0x0001 // һ�����  ������
-#define YJFL 0x0002 // һ������
-#define EJDH 0x0003 // �������
-#define EJFL 0x0004 // ��������  /* �׶�A */
+//点火发射阶段
+#define SXGB 0x0000 // 受限滚转
 
-#define DYZK 0x0005 // ����չ��
-#define FDGR 0x0006 // ��������
-#define ZDJD 0x0007 // �жλ���  /* �׶�B */
+#define TLJCYQRXH 0x0001 // 推力监测与确认信号
+#define FSTFLXH 0x0002 // 发射台分离信号
 
-#define DTFL 0x0008 // ��ͷ����
-#define LDZD 0x0009 // �״��Ƶ�
-#define HWZD 0x000a // �����Ƶ�
-#define MBFP 0x000b // Ŀ�����
-#define DJJD 0x000c // ����Ƕ�  /* �׶�C */
+//助推段
+#define YJFDJGBZLXH 0x0003 // 一级发动机关机指令信号
+#define YJFLJGJSXH 0x0004 // 一级分离机构解锁信号
+#define EJFDJDHXH 0x0005 // 二级发动机点火信号
+#define ZLZFLXH 0x0006 // 整流罩分离信号
+#define MZTJGBZLXH 0x0007 // 末助推级关机指令信号
+
+//中段
+#define GXZDXZXH 0x0008 // 惯性制导修正信号
+#define XGZDJZXH 0x0009 // 星光制导校准信号（高精度）
+#define DTMCJSXH 0x000a // 弹头母舱解锁信号
+#define YESFXH 0x000b // 诱饵释放指令
+
+//末段
+#define ZRZTTZXH 0x000c // 再入姿态调整信号
+#define MDZDXZXH 0x000d // 末端制导修正信号（高精度）
+#define YXBXJSXH 0x000e // 引信保险解除信号
+#define YBZLXH 0x000f // 引爆指令信号
 
 typedef struct
 {

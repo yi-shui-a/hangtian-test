@@ -8,20 +8,25 @@
 
 // ����ʱ�� ���ڵ��� 
 #define SXGB_DELTA 0
-#define YJDH_DELTA 5000
-#define YJFL_DELTA 15000
-#define EJDH_DELTA 25000
-#define EJFL_DELTA 60000      /* �׶�A */
 
-#define DYZK_DELTA  40000 
-#define FDGR_DELTA  50000 
-#define ZDJD_DELTA  55000     /* �׶�B */
+#define TLJCYQRXH_DELTA 80
+#define FSTFLXH_DELTA 400
+#define YJFDJGBZLXH_DELTA 3000
+#define YJFLJGJSXH_DELTA 30300      /* �׶�A */
+#define EJFDJDHXH_DELTA 30380
+#define ZLZFLXH_DELTA 60380
+#define MZTJGBZLXH_DELTA 80000    /* �׶�A */
+
+#define GXZDXZXH_DELTA  3000 
+#define XGZDJZXH_DELTA  50000 
+#define DTMCJSXH_DELTA  60000     /* �׶�B */
+#define YESFXH_DELTA  210000     /* �׶�B */
  
-#define DTFL_DELTA  10000 
-#define LDZD_DELTA  15000 
-#define HWZD_DELTA  27000 
-#define MBFP_DELTA  28000 
-#define DJJD_DELTA  70000     /* �׶�C */
+#define ZRZTTZXH_DELTA  170000 
+#define MDZDXZXH_DELTA  174000 
+#define YXBXJSXH_DELTA  179400
+#define YBZLXH_DELTA    180000
+
 
 // ��������
 void init_trajectory_stepA(uint32_t current); /* �������� */

@@ -410,6 +410,8 @@ static uint8_t current_step_num;
 uint32_t getCurrentTime(uint32_t tick_counter){
 	return tick_counter;
 }
+
+// 间隔取点，定义宏 点数
 uint8_t getCurrentStepStatus(uint32_t index){
     uint8_t i;
     static uint8_t ascending = 0;

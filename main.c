@@ -7,9 +7,9 @@
 // 事件名称映射表
 const char* get_event_name(uint16_t event_code) {
     static const char* event_names[] = {
-        "Flying","YJDH", "YJFL", "EJDH", "EJFL", 
-        "DYZK", "FDGR", "ZDJD", "DTFL",
-        "LDZD", "HWZD", "MBFP", "DJJD"
+        "Flying","TLJCYQRXH", "FSTFLXH", "YJFDJGBZLXH", "YJFLJGJSXH", 
+        "EJFDJDHXH", "ZLZFLXH", "MZTJGBZLXH", "GXZDXZXH",
+        "XGZDJZXH", "DTMCJSXH", "YESFXH", "ZRZTTZXH","MDZDXZXH","YXBXJSXH","YBZLXH"
     };
     
     if (event_code < sizeof(event_names)/sizeof(event_names[0])) {
@@ -21,7 +21,7 @@ const char* get_event_name(uint16_t event_code) {
 int main() {
     // 初始化参数
     uint32_t start_time_ms = 0;        // 起始时间(毫秒)
-    uint32_t time_step_ms = 100;      // 时间步长(毫秒)
+    uint32_t time_step_ms = 100;       // 时间步长(毫秒)
     uint32_t end_time_ms = 400000;     // 结束时间(毫秒)
     uint32_t current_time_ms = start_time_ms;
     
@@ -42,7 +42,7 @@ int main() {
         if (event != 0x00e2) {  // 过滤错误码
             if(event == 0x00AC) {
                 printf("[%6ums] [Action] (0x%04x)\n", 
-                       current_time_ms, event);
+                       current_time_ms, event);  // 点火开关
             } else {
 
             printf("[%6ums] 事件: %s (0x%04x)\n", 
@@ -59,6 +59,6 @@ int main() {
         };
         nanosleep(&ts, NULL);
     }
-    printf("导弹控制系统运行结束\n");
+    printf("DD控制系统运行结束\n");
     return 0;
 }

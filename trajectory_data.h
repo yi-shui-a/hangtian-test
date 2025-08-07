@@ -15,7 +15,7 @@ typedef struct trajectory
     double accelerationY;     /* Y����ٶȣ���λ����/��2�� */
     double accelerationZ;     /* Z����ٶȣ���λ����/��2�� */
     double velocityX;         /* X���ٶȣ���λ����/�룩 */
-    double velocityY;         /* Y���ٶȣ���λ����/�룩 */
+    double velocityY;         /* Y���ٶȣ���λ����/�룩 */ 
     double velocityZ;         /* Z���ٶȣ���λ����/�룩 */
     double yawAngle;          /* ƫ���Ƕȣ���λ���ȣ� */
     double pitchAngle;        /* �����Ƕȣ���λ���ȣ� */
@@ -28,7 +28,7 @@ typedef struct trajectory
     double rollAcceleration;  /* ����Ǽ��ٶȣ���λ����/��2�� */
 } TrajectoryData;
 
-#define ALTITUDE_DELTA 1000
+#define ALTITUDE_DELTA 50
 
 uint32_t getCurrentTime(uint32_t tick_counter); /* ��ȡ��ǰʱ�� */
 

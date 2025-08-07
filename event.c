@@ -36,8 +36,8 @@ void insert_node(uint32_t time, uint16_t event, uint8_t isNull)
 
 uint16_t get_current_node(uint32_t current_time)
 {
-	printf("array_index = %d\n", array_index);
-	printf("array_current = %d\n", array_current);
+	// printf("array_index = %d\n", array_index);
+	// printf("array_current = %d\n", array_current);
 
 	uint16_t current_event = 0;
 
