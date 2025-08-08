@@ -34,7 +34,7 @@ uint16_t update_missile_position(uint32_t current_time){
 
 	uint8_t step = getCurrentStep(current_time, index); 
 
-    printf("Current time: %ums, Step: %d \n", current_time, step);
+    // printf("Current time: %ums, Step: %d \n", current_time, step);
 
 	if(step == 0xe2){
 		return 0x00e2; // return CurrentStep error code
@@ -57,10 +57,10 @@ uint16_t update_missile_position(uint32_t current_time){
 			init_trajectory_stepC(current_time);
 		}
 	}
-	printf("Current Step is  0x%04x \n",step);
+	// printf("Current Step is  0x%04x \n",step);
 
 	uint16_t ret_command_code = get_current_node(current_time);
 	index++;	
-	printf("Current index is %d \n", index);
+	// printf("Current index is %d \n", index);
   	return  ret_command_code;
 }

@@ -43,7 +43,7 @@ uint16_t get_current_node(uint32_t current_time)
 
 	if ((current_time >= discrete_points[array_current].time) && (current_time < discrete_points[array_current + 1].time))
 	{
-		printf("(current_time >= discrete_points[array_current].time)---------------------------------------------- \n");
+		// printf("(current_time >= discrete_points[array_current].time)---------------------------------------------- \n");
 
 		if (discrete_points[array_current].isNull > 0){
 			current_event = discrete_points[array_current].event;

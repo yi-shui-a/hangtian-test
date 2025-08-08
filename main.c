@@ -41,12 +41,10 @@ int main() {
         // 打印事件信息
         if (event != 0x00e2) {  // 过滤错误码
             if(event == 0x00AC) {
-                printf("[%6ums] [Action] (0x%04x)\n", 
-                       current_time_ms, event);  // 点火开关
+                printf("[%6ums] [Action] (0x%04x)\n", current_time_ms, event);  // 点火开关
             } else {
 
-            printf("[%6ums] 事件: %s (0x%04x)\n", 
-                   current_time_ms, get_event_name(event), event);
+            printf("[%6ums] 事件: %s (0x%04x)\n", current_time_ms, get_event_name(event), event);
             }
         }
         // 更新当前时间
