@@ -6,33 +6,43 @@
 #include <stdio.h>
 #include "trajectory_data.h"
 
-// ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ 
+// ÊÂ¼ş¶¨Òå
 #define SXGB_DELTA 0
-#define YJDH_DELTA 5000
-#define YJFL_DELTA 15000
-#define EJDH_DELTA 25000
-#define EJFL_DELTA 60000      /* ï¿½×¶ï¿½A */
+// µã»ğ·¢Éä½×¶Î
+#define TLJCYQRXH_DELTA 80 // ÍÆÁ¦¼à²âÓëÈ·ÈÏĞÅºÅ
+#define FSTFLXH_DELTA 400  // ·¢ÉäÌ¨·ÖÀëĞÅºÅ
 
-#define DYZK_DELTA  60000 
-#define FDGR_DELTA  120000 
-#define ZDJD_DELTA  190000     /* ï¿½×¶ï¿½B */
- 
-#define DTFL_DELTA  0 
-#define LDZD_DELTA  50000 
-#define HWZD_DELTA  80000 
-#define MBFP_DELTA  90000 
-#define DJJD_DELTA  99000     /* ï¿½×¶ï¿½C */
+// ÖúÍÆ¶Î
+#define YJFDJGBZLXH_DELTA 29500 // Ò»¼¶·¢¶¯»ú¹Ø»úÖ¸ÁîĞÅºÅ
+#define YJFLJGJSXH_DELTA 29800 // Ò»¼¶·ÖÀë»ú¹¹½âËøĞÅºÅ
+#define EJFDJDHXH_DELTA 29880 // ¶ş¼¶·¢¶¯»úµã»ğĞÅºÅ
+#define ZLZFLXH_DELTA 59880    // ÕûÁ÷ÕÖ·ÖÀëĞÅºÅ
+#define MZTJGBZLXH_DELTA 79500 // Ä©ÖúÍÆ¼¶¹Ø»úÖ¸ÁîĞÅºÅ
 
-// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-void init_trajectory_stepA(); /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+// ÖĞ¶Î
+#define GXZDXZXH_DELTA 3000 // ¹ßĞÔÖÆµ¼ĞŞÕıĞÅºÅ£¬3000msÒ»´Î
+#define XGZDJZXH_DELTA 50000 // ĞÇ¹âÖÆµ¼Ğ£×¼ĞÅºÅ£¨¸ß¾«¶È£©£¬50000msÒ»´Î
+#define DTMCJSXH_DELTA 160000 // µ¯Í·Ä¸²Õ½âËøĞÅºÅ
+#define YESFXH_DELTA 5000 // ÓÕ¶üÊÍ·ÅÖ¸Áî
 
-void init_trajectory_stepB(); /*  */
+// Ä©¶Î
+#define ZRZTTZXH_DELTA 0     // ÔÙÈë×ËÌ¬µ÷ÕûĞÅºÅ
+#define MDZDXZXH_DELTA 14000 // Ä©¶ËÖÆµ¼ĞŞÕıĞÅºÅ£¨¸ß¾«¶È£©
+#define YXBXJSXH_DELTA 15400 // ÒıĞÅ±£ÏÕ½â³ıĞÅºÅ
+#define YBZLXH_DELTA 19000   // Òı±¬Ö¸ÁîĞÅºÅ
 
-void init_trajectory_stepC();
+// ³õÊ¼»¯µ¯µÀ¹ì¼£º¯Êı
+void init_trajectory_stepA(); /* ³õÊ¼»¯½×¶ÎAµ¯µÀ²ÎÊı */
 
-extern uint32_t current_step;  /* 0Î´ï¿½ï¿½ï¿½  1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¶Î¡ï¿½  2ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¼ï¿½×¶Î¡ï¿½ 3ï¿½ï¿½ï¿½ï¿½Ä©ï¿½ï¿½  */
+void init_trajectory_stepB(); /* ³õÊ¼»¯½×¶ÎBµ¯µÀ²ÎÊı */
 
-uint16_t update_missile_position(uint32_t current_time);
+void init_trajectory_stepC(); /* ³õÊ¼»¯½×¶ÎCµ¯µÀ²ÎÊı */
+
+void init_trajectory_stepD(); /* ³õÊ¼»¯½×¶ÎDµ¯µÀ²ÎÊı */
+
+extern uint32_t current_step; /* µ±Ç°·ÉĞĞ½×¶Î±êÊ¶£º0Î´·¢Éä£¬1µã»ğ·¢Éä½×¶Î£¬2ÖĞ¶ÎÖÆµ¼½×¶Î£¬3Ä©¶ÎÖÆµ¼ */
+
+/* ¸üĞÂµ¼µ¯Î»ÖÃĞÅÏ¢ */
+uint16_t update_missile_position(uint32_t current_time); // current_time: µ±Ç°Ê±¼ä´Á(ºÁÃë)
 
 #endif /* __MISSILE_CONTROL_H */
-    

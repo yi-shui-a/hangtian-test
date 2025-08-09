@@ -11,5 +11,7 @@
         "cmath": "c",
         "stdio.h": "c"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.autoGuessEncoding": true,
+    "files.encoding": "utf8"
 }

@@ -1,27 +1,7 @@
 
 #include "event.h"
 
-Event discrete_points[] = {
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0},
-    {0, SXGB, 0}}; /* 20 锟斤拷锟? */
+Event discrete_points[150]; /* 130 个事件 */
 
 uint8_t array_index = 0;
 
@@ -34,6 +14,16 @@ void insert_node(uint32_t time, uint16_t event, uint8_t isNull)
     discrete_points[array_index].isNull = isNull;
     array_index++;
 }
+
+void init_discrete_points()
+{
+    for(int i=0;i<150;i++){
+        discrete_points[i].time = 0;
+        discrete_points[i].event = SXGB;
+        discrete_points[i].isNull = 0;
+    }
+}
+
 
 // 判断当前飞行状态是否符合事件需求
 int check(float trend, uint32_t alt_samples[], uint32_t current_step, uint16_t current_event)
@@ -68,9 +58,48 @@ int check(float trend, uint32_t alt_samples[], uint32_t current_step, uint16_t c
             return 0;
         }
 
+        // 点火发射阶段特殊事件检查
+        if (current_event == TLJCYQRXH)
+        {
+            if (trend < 60)
+                return 0;
+        }
+        else if (current_event == FSTFLXH)
+        {
+            if (alt_samples[2] < 1000)
+                return 0;
+        }
+
+        // 助推段特殊事件检查
+        if (current_event == YJFDJGBZLXH)
+        {
+            if (alt_samples[2] < 30000)
+                return 0;
+        }
+        else if (current_event == YJFLJGJSXH)
+        {
+            if (alt_samples[2] < 35000)
+                return 0;
+        }
+        else if (current_event == EJFDJDHXH)
+        {
+            if (alt_samples[2] < 40000)
+                return 0;
+        }
+        else if (current_event == ZLZFLXH)
+        {
+            if (alt_samples[2] < 50000)
+                return 0;
+        }
+        else if (current_event == MZTJGBZLXH)
+        {
+            if (alt_samples[2] < 70000)
+                return 0;
+        }
+
         return 0;
     }
-    // 巡航阶段判断
+    // 巡航阶段判断（中段）
     else if (current_step == 2)
     {
         // 巡航阶段要求高度相对稳定
@@ -96,6 +125,28 @@ int check(float trend, uint32_t alt_samples[], uint32_t current_step, uint16_t c
             return 0;
         }
 
+        // 中段特殊事件检查
+        if (current_event == GXZDXZXH)
+        {
+            if (fabs(trend) > 10)
+                return 0;
+        }
+        else if (current_event == XGZDJZXH)
+        {
+            if (alt_samples[2] < 80000 || alt_samples[2] > 100000)
+                return 0;
+        }
+        else if (current_event == DTMCJSXH)
+        {
+            if (alt_samples[2] < 90000)
+                return 0;
+        }
+        else if (current_event == YESFXH)
+        {
+            if (alt_samples[2] < 95000)
+                return 0;
+        }
+
         return 0;
     }
     // 末端阶段判断
@@ -114,19 +165,26 @@ int check(float trend, uint32_t alt_samples[], uint32_t current_step, uint16_t c
             return 0;
         }
 
-        // 末端机动检查
-        if (current_event == DJJD)
+        // 末段特殊事件检查
+        if (current_event == ZRZTTZXH)
         {
-            if (trend > -50)
-            {
+            if (trend > -40)
                 return 0;
-            }
         }
-
-        // 高度阈值检查
-        if (alt_samples[2] > 5000 && trend > -40)
+        else if (current_event == MDZDXZXH)
         {
-            return 0;
+            if (alt_samples[2] > 20000)
+                return 0;
+        }
+        else if (current_event == YXBXJSXH)
+        {
+            if (alt_samples[2] > 5000)
+                return 0;
+        }
+        else if (current_event == YBZLXH)
+        {
+            if (alt_samples[2] > 1000)
+                return 0;
         }
 
         return 0;
@@ -134,6 +192,7 @@ int check(float trend, uint32_t alt_samples[], uint32_t current_step, uint16_t c
 
     return 0;
 }
+
 uint16_t get_current_node(uint32_t current_time, uint32_t current_step)
 {
 
@@ -166,8 +225,9 @@ uint16_t get_current_node(uint32_t current_time, uint32_t current_step)
         // 时间条件满足且高度变化趋势符合要求
         if (discrete_points[array_current].isNull > 0 || check(trend, alt_samples, current_step, discrete_points[array_current].event))
         {
-            if (discrete_points[array_current + 1].time - current_time >= discrete_points[array_current].time - current_time)
+            if (discrete_points[array_current + 1].time - current_time || discrete_points[array_current].time - current_time)
             {
+                printf("array_current: %d\n", array_current);
                 current_event = discrete_points[array_current].event;
                 discrete_points[array_current].isNull--;
             }
@@ -189,8 +249,7 @@ uint16_t get_current_node(uint32_t current_time, uint32_t current_step)
             }
         }
 
-        printf("array_current: %d\n", array_current);
+        // printf("array_current: %d\n", array_current);
     }
-
     return current_event;
 }

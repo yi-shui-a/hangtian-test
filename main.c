@@ -8,9 +8,10 @@
 const char* get_event_name(uint16_t event_code) {
     static const char* event_names[] = {
         "FLYING",
-        "YJDH", "YJFL", "EJDH", "EJFL", 
-        "DYZK", "FDGR", "ZDJD", "DTFL",
-        "LDZD", "HWZD", "MBFP", "DJJD"
+        "TLJCYQRXH", "FSTFLXH", 
+        "YJFDJGBZLXH","YJFLJGJSXH","EJFDJDHXH","ZLZFLXH","MZTJGBZLXH",
+        "GXZDXZXH","XGZDJZXH","DTMCJSXH","YESFXH",
+        "ZRZTTZXH","MDZDXZXH","YXBXJSXH","YBZLXH"
     };
     
     if (event_code < sizeof(event_names)/sizeof(event_names[0])) {

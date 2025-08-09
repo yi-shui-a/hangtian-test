@@ -7,35 +7,45 @@
 #include <math.h>
 #include "trajectory_data.h"
 
-// ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
-#define SXGB 0x0000 // Ê±ï¿½ï¿½Ø±ï¿½?
-#define YJDH 0x0001 // Ò»ï¿½ï¿½ï¿½ï¿½ï¿½?  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-#define YJFL 0x0002 // Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-#define EJDH 0x0003 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
-#define EJFL 0x0004 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  /* ï¿½×¶ï¿½A */
+// ÊÂ¼ş¶¨Òå
+#define SXGB 0x0000
+//µã»ğ·¢Éä½×¶Î
+#define TLJCYQRXH 0x0001 // ÍÆÁ¦¼à²âÓëÈ·ÈÏĞÅºÅ
+#define FSTFLXH 0x0002 // ·¢ÉäÌ¨·ÖÀëĞÅºÅ
 
-#define DYZK 0x0005 // ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½
-#define FDGR 0x0006 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-#define ZDJD 0x0007 // ï¿½Ğ¶Î»ï¿½ï¿½ï¿½  /* ï¿½×¶ï¿½B */
+//ÖúÍÆ¶Î
+#define YJFDJGBZLXH 0x0003 // Ò»¼¶·¢¶¯»ú¹Ø»úÖ¸ÁîĞÅºÅ
+#define YJFLJGJSXH 0x0004 // Ò»¼¶·ÖÀë»ú¹¹½âËøĞÅºÅ
+#define EJFDJDHXH 0x0005 // ¶ş¼¶·¢¶¯»úµã»ğĞÅºÅ
+#define ZLZFLXH 0x0006 // ÕûÁ÷ÕÖ·ÖÀëĞÅºÅ
+#define MZTJGBZLXH 0x0007 // Ä©ÖúÍÆ¼¶¹Ø»úÖ¸ÁîĞÅºÅ
 
-#define DTFL 0x0008 // ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½
-#define LDZD 0x0009 // ï¿½×´ï¿½ï¿½Æµï¿½
-#define HWZD 0x000a // ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½
-#define MBFP 0x000b // Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½?
-#define DJJD 0x000c // ï¿½ï¿½ï¿½ï¿½Ç¶ï¿½?  /* ï¿½×¶ï¿½C */
+//ÖĞ¶Î
+#define GXZDXZXH 0x0008 // ¹ßĞÔÖÆµ¼ĞŞÕıĞÅºÅ
+#define XGZDJZXH 0x0009 // ĞÇ¹âÖÆµ¼Ğ£×¼ĞÅºÅ£¨¸ß¾«¶È£©
+#define DTMCJSXH 0x000a // µ¯Í·Ä¸²Õ½âËøĞÅºÅ
+#define YESFXH 0x000b // ÓÕ¶üÊÍ·ÅÖ¸Áî
+
+//Ä©¶Î
+#define ZRZTTZXH 0x000c // ÔÙÈë×ËÌ¬µ÷ÕûĞÅºÅ
+#define MDZDXZXH 0x000d // Ä©¶ËÖÆµ¼ĞŞÕıĞÅºÅ£¨¸ß¾«¶È£©
+#define YXBXJSXH 0x000e // ÒıĞÅ±£ÏÕ½â³ıĞÅºÅ
+#define YBZLXH 0x000f // Òı±¬Ö¸ÁîĞÅºÅ
 
 typedef struct
 {
-	uint32_t time;	/* Ê±ï¿½ä£¨ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ë£© */
-	uint16_t event; /* ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ */
-	uint8_t isNull; /* ï¿½Ç·ï¿½ï¿½? 0ï¿½ï¿½ 1Õ¼ï¿½ï¿½ */
+    uint32_t time;    /* ÊÂ¼ş·¢ÉúµÄÊ±¼ä´Á£¨µ¥Î»£ººÁÃë£© */
+    uint16_t event;   /* ÊÂ¼şÀàĞÍ */
+    uint8_t isNull;   /* ÊÇ·ñÎª¿ÕÊÂ¼ş£º0±íÊ¾·Ç¿Õ£¬1±íÊ¾¿Õ */
 } Event;
 
-// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
+/* ²åÈëÊÂ¼ş½Úµãµ½ÊÂ¼şÁ´±íÖĞ */
 void insert_node(uint32_t time, uint16_t event, uint8_t isNull);
 
+/* ¼ì²éÇ÷ÊÆÊÇ·ñ·ûºÏÌõ¼ş£¬²¢·µ»Ø¼ì²é½á¹û */
 int check(float trend, uint32_t alt_samples[], uint32_t current_step, uint16_t current_event);
 
-uint16_t get_current_node(uint32_t current_time,uint32_t current_step);
+/* ¸ù¾İµ±Ç°Ê±¼äºÍ²½³¤»ñÈ¡µ±Ç°½ÚµãµÄÊÂ¼şÀàĞÍ */
+uint16_t get_current_node(uint32_t current_time, uint32_t current_step);
 
 #endif
