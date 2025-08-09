@@ -6,3 +6,6 @@ gcc position2.c -o position2 -lm
 
 编译main函数
 gcc main.c event.c trajectory_data.c missile_control.c generateData.c -o missile_simulator -lm
+
+
+![alt text](image.png)

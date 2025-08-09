@@ -8,30 +8,30 @@
 typedef struct trajectory
 {
     uint32_t time;
-    double longitude;         /* ���ȣ���λ���ȣ� */
-    double latitude;          /* γ�ȣ���λ���ȣ� */
-    double altitude;          /* ���θ߶ȣ���λ���ף� */
-    double accelerationX;     /* X����ٶȣ���λ����/��2�� */
-    double accelerationY;     /* Y����ٶȣ���λ����/��2�� */
-    double accelerationZ;     /* Z����ٶȣ���λ����/��2�� */
-    double velocityX;         /* X���ٶȣ���λ����/�룩 */
-    double velocityY;         /* Y���ٶȣ���λ����/�룩 */ 
-    double velocityZ;         /* Z���ٶȣ���λ����/�룩 */
-    double yawAngle;          /* ƫ���Ƕȣ���λ���ȣ� */
-    double pitchAngle;        /* �����Ƕȣ���λ���ȣ� */
-    double rollAngle;         /* ����Ƕȣ���λ���ȣ� */
-    double yawRate;           /* ƫ�����ٶȣ���λ����/�룩 */
-    double pitchRate;         /* �������ٶȣ���λ����/�룩 */
-    double rollRate;          /* ������ٶȣ���λ����/�룩 */
-    double yawAcceleration;   /* ƫ���Ǽ��ٶȣ���λ����/��2�� */
-    double pitchAcceleration; /* �����Ǽ��ٶȣ���λ����/��2�� */
-    double rollAcceleration;  /* ����Ǽ��ٶȣ���λ����/��2�� */
+    double longitude;         /**< 经度（单位：度） */
+    double latitude;          /**< 纬度（单位：度） */
+    double altitude;          /**< 海拔高度（单位：米） */
+    double accelerationX;     /**< X轴加速度（单位：米/秒2） */
+    double accelerationY;     /**< Y轴加速度（单位：米/秒2） */
+    double accelerationZ;     /**< Z轴加速度（单位：米/秒2） */
+    double velocityX;         /**< X轴速度（单位：米/秒） */
+    double velocityY;         /**< Y轴速度（单位：米/秒） */
+    double velocityZ;         /**< Z轴速度（单位：米/秒） */
+    double yawAngle;          /**< 偏航角度（单位：度） */
+    double pitchAngle;        /**< 俯仰角度（单位：度） */
+    double rollAngle;         /**< 横滚角度（单位：度） */
+    double yawRate;           /**< 偏航角速度（单位：度/秒） */
+    double pitchRate;         /**< 俯仰角速度（单位：度/秒） */
+    double rollRate;          /**< 横滚角速度（单位：度/秒） */
+    double yawAcceleration;   /**< 偏航角加速度（单位：度/秒2） */
+    double pitchAcceleration; /**< 俯仰角加速度（单位：度/秒2） */
+    double rollAcceleration;  /**< 横滚角加速度（单位：度/秒2） */
 } TrajectoryData;
 
 #define ALTITUDE_DELTA 50
 
-uint32_t getCurrentTime(uint32_t tick_counter); /* ��ȡ��ǰʱ�� */
+uint32_t getCurrentTime(uint32_t tick_counter); 
 
-uint8_t getCurrentStep(uint32_t tick_counter, uint32_t index ); /* ��ȡ��ǰ�׶� ����ǰ�� 5���� */
+uint8_t getCurrentStep(uint32_t tick_counter, uint32_t index ); 
 
 #endif

@@ -6,7 +6,6 @@ static uint32_t index = 0;
 static uint32_t current_step = 0;
 
 void init_trajectory_stepA(uint32_t current){
-	insert_node(current + SXGB_DELTA, SXGB, 1);
 	insert_node(current + TLJCYQRXH_DELTA, TLJCYQRXH, 1); 
 	insert_node(current + FSTFLXH_DELTA, FSTFLXH, 1);
 	insert_node(current + YJFDJGBZLXH_DELTA, YJFDJGBZLXH, 1);
