@@ -24,12 +24,11 @@ void init_trajectory_stepC(uint32_t current)
 {
 	int GXZDXZXH_time = current;
 	int XGZDJZXH_time = current;
-	for (int i = current; i < 378000; i += 1000)
+	for (int i = current; i < 224000; i += 1000)
 	{
 		if ((GXZDXZXH_time - current) % GXZDXZXH_DELTA == 0 && (GXZDXZXH_time - current) != 0)
 		{
 			insert_node(GXZDXZXH_time, GXZDXZXH, 1);
-			printf("GXZDXZXH_time: %d\n", GXZDXZXH_time);
 		}
 		if ((XGZDJZXH_time - current) % XGZDJZXH_DELTA == 0 && (XGZDJZXH_time - current) != 0)
 		{

@@ -9,27 +9,27 @@
 // 事件定义
 #define SXGB_DELTA 0
 // 点火发射阶段
-#define TLJCYQRXH_DELTA 80 // 推力监测与确认信号
-#define FSTFLXH_DELTA 400  // 发射台分离信号
+#define TLJCYQRXH_DELTA 60 // 推力监测与确认信号
+#define FSTFLXH_DELTA 250  // 发射台分离信号
 
 // 助推段
-#define YJFDJGBZLXH_DELTA 29500 // 一级发动机关机指令信号
-#define YJFLJGJSXH_DELTA 29800 // 一级分离机构解锁信号
-#define EJFDJDHXH_DELTA 29880 // 二级发动机点火信号
-#define ZLZFLXH_DELTA 59880    // 整流罩分离信号
-#define MZTJGBZLXH_DELTA 79500 // 末助推级关机指令信号
+#define YJFDJGBZLXH_DELTA 18000 // 一级发动机关机指令信号
+#define YJFLJGJSXH_DELTA 18200  // 一级分离机构解锁信号
+#define EJFDJDHXH_DELTA 18400   // 二级发动机点火信号
+#define ZLZFLXH_DELTA 38500    // 整流罩分离信号
+#define MZTJGBZLXH_DELTA 47500 // 末助推级关机指令信号
 
 // 中段
-#define GXZDXZXH_DELTA 3000 // 惯性制导修正信号，3000ms一次
-#define XGZDJZXH_DELTA 50000 // 星光制导校准信号（高精度），50000ms一次
-#define DTMCJSXH_DELTA 160000 // 弹头母舱解锁信号
-#define YESFXH_DELTA 5000 // 诱饵释放指令
+#define GXZDXZXH_DELTA 2000   // 惯性制导修正信号，2000ms一次
+#define XGZDJZXH_DELTA 30000  // 星光制导校准信号（高精度），30000ms一次
+#define DTMCJSXH_DELTA 130000 // 弹头母舱解锁信号
+#define YESFXH_DELTA 3000     // 诱饵释放指令
 
 // 末段
 #define ZRZTTZXH_DELTA 0     // 再入姿态调整信号
-#define MDZDXZXH_DELTA 14000 // 末端制导修正信号（高精度）
-#define YXBXJSXH_DELTA 15400 // 引信保险解除信号
-#define YBZLXH_DELTA 19000   // 引爆指令信号
+#define MDZDXZXH_DELTA 7000 // 末端制导修正信号（高精度）
+#define YXBXJSXH_DELTA 9400 // 引信保险解除信号
+#define YBZLXH_DELTA 11300   // 引爆指令信号
 
 // 初始化弹道轨迹函数
 void init_trajectory_stepA(); /* 初始化阶段A弹道参数 */

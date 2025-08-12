@@ -70,20 +70,14 @@ typedef struct {
 
 #define CURRENT_TIME 0   
 #define TIME_STEP_MS 1000     // 当前时间（毫秒）
-#define TOTAL_TIME_MS 40000   // 总时间（400 000ms = 400秒）
+#define TOTAL_TIME_MS 240000   // 总时间（240 000ms = 240秒）
 
-#define STEP_A 500           // 上升阶段结束 时间0.5s 
-#define STEP_B 80000           // 上升阶段结束 时间80s 
-#define STEP_C 380000          // 巡航阶段结束 时间380s
-#define STEP_D 400000          // 攻击阶段结束 时间400s
+#define STEP_A 300           // 上升阶段结束 时间0.3s 
+#define STEP_B 48000           // 上升阶段结束 时间48s 
+#define STEP_C 228000          // 巡航阶段结束 时间228s
+#define STEP_D 240000          // 攻击阶段结束 时间240s
 
 #define TIME_BASE  100 
-
-//uint32_t current_time_ms = 0;       
-//uint32_t time_step_ms = 1000;        // 时间步长（1000ms = 1秒）
-//uint32_t total_time_ms = 400000;    // 总时间（400 000ms = 400秒）
-//uint32_t stepA = 60000;                 // 上升阶段结束 时间60s 
-//uint32_t stepB = 300000;								// 平飞阶段结束 时间300s
 
 DiscretePoint simulateMissileEvent(uint32_t time_ms) ;
 

@@ -19,10 +19,10 @@
 #define DJJD  0x000b // 打击角度
 
 
-#define STEP_A 500           // 上升阶段结束 时间0.5s 
-#define STEP_B 80000           // 上升阶段结束 时间80s 
-#define STEP_C 380000          // 巡航阶段结束 时间380s
-#define STEP_D 400000          // 攻击阶段结束 时间400s
+#define STEP_A 300           // 上升阶段结束 时间0.3s 
+#define STEP_B 48000           // 上升阶段结束 时间48s 
+#define STEP_C 228000          // 巡航阶段结束 时间228s
+#define STEP_D 240000          // 攻击阶段结束 时间240s
 
 /**
  * @brief 导弹状态结构体
@@ -208,7 +208,7 @@ int main() {
     srand(time(NULL));
 
     // 创建并打开输出文件
-    FILE *file = fopen("python_test_final.c", "w");
+    FILE *file = fopen("python_test_final_240s.c", "w");
     if (file == NULL) {
         fprintf(stderr, "Error: Could not open file for writing.\n");
         return 1;
