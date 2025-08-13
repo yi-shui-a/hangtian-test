@@ -217,44 +217,6 @@ int main() {
     // 写入结构体定义
     fprintf(file, "#include <stdint.h>\n\n");
 
-    // // 写入事件宏定义
-    // fprintf(file, "// 事件定义\n");
-    // fprintf(file, "#define YJDH  0x0000 // 一级点火\n");
-    // fprintf(file, "#define YJFL  0x0001 // 一级分离\n");
-    // fprintf(file, "#define EJDH  0x0002 // 二级点火\n");
-    // fprintf(file, "#define EJFL  0x0003 // 二级分离\n");
-    // fprintf(file, "#define DYZK  0x0004 // 弹翼展开\n");
-    // fprintf(file, "#define FDGR  0x0005 // 反弹干扰\n");
-    // fprintf(file, "#define ZDJD  0x0006 // 中段机动\n");
-    // fprintf(file, "#define DTFL  0x0007 // 弹头分离\n");
-    // fprintf(file, "#define LDZD  0x0008 // 雷达制导\n");
-    // fprintf(file, "#define HWZD  0x0009 // 红外制导\n");
-    // fprintf(file, "#define MBFP  0x000a // 目标分配\n");
-    // fprintf(file, "#define DJJD  0x000b // 打击角度\n\n");
-
-    // fprintf(file, "typedef struct {\n");
-    // fprintf(file, "    double time;                  /* 时间（单位：毫秒） */\n");
-    // fprintf(file, "    uint16_t event;               /* 事件索引 */\n");
-    // fprintf(file, "    double longitude;             /* 经度（单位：度） */\n");
-    // fprintf(file, "    double latitude;              /* 纬度（单位：度） */\n");
-    // fprintf(file, "    double altitude;              /* 海拔高度（单位：米） */\n");
-    // fprintf(file, "    double accelerationX;         /* X轴加速度（单位：米/秒²） */\n");
-    // fprintf(file, "    double accelerationY;         /* Y轴加速度（单位：米/秒²） */\n");
-    // fprintf(file, "    double accelerationZ;         /* Z轴加速度（单位：米/秒²） */\n");
-    // fprintf(file, "    double velocityX;             /* X轴速度（单位：米/秒） */\n");
-    // fprintf(file, "    double velocityY;             /* Y轴速度（单位：米/秒） */\n");
-    // fprintf(file, "    double velocityZ;             /* Z轴速度（单位：米/秒） */\n");
-    // fprintf(file, "    double yawAngle;              /* 偏航角度（单位：度） */\n");
-    // fprintf(file, "    double pitchAngle;            /* 俯仰角度（单位：度） */\n");
-    // fprintf(file, "    double rollAngle;             /* 横滚角度（单位：度） */\n");
-    // fprintf(file, "    double yawRate;               /* 偏航角速度（单位：度/秒） */\n");
-    // fprintf(file, "    double pitchRate;             /* 俯仰角速度（单位：度/秒） */\n");
-    // fprintf(file, "    double rollRate;              /* 横滚角速度（单位：度/秒） */\n");
-    // fprintf(file, "    double yawAcceleration;       /* 偏航角加速度（单位：度/秒²） */\n");
-    // fprintf(file, "    double pitchAcceleration;     /* 俯仰角加速度（单位：度/秒²） */\n");
-    // fprintf(file, "    double rollAcceleration;      /* 横滚角加速度（单位：度/秒²） */\n");
-    // fprintf(file, "} DiscretePoint;\n\n");
-
     // 写入数组定义
     fprintf(file, "TrajectoryData trajectory_data[] = {\n", point_count);
 

@@ -9,7 +9,8 @@
         "event.h": "c",
         "generatedata.h": "c",
         "cmath": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "stdlib.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "files.autoGuessEncoding": true,

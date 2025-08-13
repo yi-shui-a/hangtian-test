@@ -227,7 +227,7 @@ uint16_t get_current_node(uint32_t current_time, uint32_t current_step)
         {
             if (discrete_points[array_current + 1].time - current_time || discrete_points[array_current].time - current_time)
             {
-                printf("array_current: %d\n", array_current);
+                // printf("array_current: %d\n", array_current);
                 current_event = discrete_points[array_current].event;
                 discrete_points[array_current].isNull--;
             }

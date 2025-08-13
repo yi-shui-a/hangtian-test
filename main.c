@@ -41,7 +41,7 @@ int main() {
         uint16_t event = update_missile_position(current_time_ms);
         
         // 打印事件信息
-        if (event != 0x00e2) {  // 过滤错误码
+        if (event != 0x00e2 && event != 0x0000) {  // 过滤错误码
             printf("[%6ums] 事件: %s (0x%04x)\n", 
                    current_time_ms, get_event_name(event), event);
         }
